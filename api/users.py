@@ -19,6 +19,6 @@ async def create_user(user: User):
     users.append(user)
     return "Success"
 
-@router.get("/users/{user_id}")
-async def get_user(user_id: int):
-    return {"user": users[user_id]}
+@router.get("/users/{id}")
+async def get_user(id: int):
+    return {"user": users[id]}

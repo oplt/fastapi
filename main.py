@@ -1,23 +1,24 @@
-from fastapi import FastAPI, Path, Query
-from api import users, sections, courses
+from fastapi import FastAPI
+from api import users, courses, sections
+from db.db_setup import engine
+from db.models import user, course
+
+user.Base.metadata.create_all(bind=engine)
+course.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-            title="FastAPI with Polat",
-                description="Test api project",
-                version="0.0.1",
-                # terms_of_service="http://example.com/terms/",
-                contact={
-                    "name": "Ali",
-                    # "url": "http://x-force.example.com/contact/",
-                    "email": "op@gmail.com",
-                },
-                license_info={
-                    "name": "SEU",
-                },
+            title="Fast API LMS",
+            description="LMS for managing students and courses.",
+            version="0.0.1",
+            contact={
+                "name": "Gwen",
+                "email": "gwen@example.com",
+            },
+            license_info={
+                "name": "MIT",
+            },
 )
 
 app.include_router(users.router)
-app.include_router(sections.router)
 app.include_router(courses.router)
-
-
+app.include_router(sections.router)
